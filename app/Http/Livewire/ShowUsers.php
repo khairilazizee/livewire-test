@@ -4,19 +4,27 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowUsers extends Component
 {
-    public $search_email;
+    use WithPagination;
 
-   
+    public $search_email;
+    public $sortField = 'id';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        $this->sortField = $field;
+    }
 
     public function render()
     {
-        sleep(2);
+        sleep(1);
         return view('livewire.show-users', [
             // 'users' => User::paginate(10)
-            'users' => User::search($this->search_email)->paginate(10),
+            'users' => User::search($this->search_email)->orderBy($this->sortField, $this->sortDirection)->paginate(10),
         ]);
     }
 
