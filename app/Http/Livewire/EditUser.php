@@ -33,7 +33,7 @@ class EditUser extends Component
 
         
         
-        return redirect()->route('user.index')->with('sukses', 'Information of user ['. $this->name .'] have been updated');
+        return redirect()->route('user.index')->with('sukses', 'User information have been updated');
     }
 
     public function render()
